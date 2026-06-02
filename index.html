@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa das Árvores | Ilha Armona, Algarve</title>
+  <meta name="description" content="Vakantiewoning op het autovrije eiland Armona in de Algarve. 3 slaapkamers, strand op loopafstand, rust en natuur." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --sand: #f5efe6;
+      --warm-white: #faf7f2;
+      --terracotta: #c17a4a;
+      --terracotta-dark: #a06338;
+      --ocean: #3a7ca5;
+      --forest: #4a6741;
+      --text: #2a2218;
+      --text-light: #6b5f50;
+      --border: rgba(193,122,74,0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    /* ── NAVIGATION ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--terracotta);
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--terracotta); }
+
+    .lang-switcher {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      color: var(--text-light);
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: white;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/5d45b621-4b53-493c-9032-d01d76e19a66.jpeg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      animation: heroZoom 8s ease-out forwards;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.0); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(30,20,10,0.1) 0%,
+        rgba(30,20,10,0.0) 40%,
+        rgba(30,20,10,0.5) 80%,
+        rgba(30,20,10,0.75) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 4rem 5rem;
+      max-width: 800px;
+      animation: fadeUp 1.2s ease 0.3s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      color: white;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: #e8c89a;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.05em;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: var(--terracotta);
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover {
+      background: var(--terracotta-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--text);
+      color: white;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .stat-item {
+      padding: 1.4rem 3rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: #e8c89a;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 6rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-body {
+      color: var(--text-light);
+      line-height: 1.8;
+      max-width: 620px;
+      font-size: 0.95rem;
+    }
+
+    /* ── INTRO ── */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .intro-image-stack {
+      position: relative;
+      height: 520px;
+    }
+
+    .intro-image-stack img {
+      position: absolute;
+      object-fit: cover;
+    }
+
+    .img-main {
+      width: 80%;
+      height: 80%;
+      top: 0; left: 0;
+    }
+
+    .img-accent {
+      width: 55%;
+      height: 50%;
+      bottom: 0; right: 0;
+      border: 5px solid var(--warm-white);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .intro-badge {
+      position: absolute;
+      top: 55%;
+      left: 58%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      z-index: 2;
+      box-shadow: 0 8px 30px rgba(193,122,74,0.4);
+    }
+
+    .intro-badge .badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .intro-badge .badge-txt {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* ── AMENITIES ── */
+    .amenities-section {
+      background: var(--sand);
+      padding: 6rem 0;
+    }
+
+    .amenities-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .amenity-card {
+      background: var(--warm-white);
+      padding: 2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .amenity-card:hover {
+      border-color: var(--terracotta);
+      transform: translateY(-4px);
+    }
+
+    .amenity-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .amenity-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .amenity-text {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 280px 280px;
+      gap: 8px;
+      margin-top: 3rem;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: 1 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .gallery-item:nth-child(5) {
+      grid-column: 3 / 5;
+      grid-row: 2 / 3;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* ── BEDROOMS ── */
+    .bedrooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .bedroom-card {
+      border: 1px solid var(--border);
+    }
+
+    .bedroom-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .bedroom-info {
+      padding: 1.5rem;
+    }
+
+    .bedroom-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+
+    .bedroom-info p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* ── CALENDAR ── */
+    .calendar-section {
+      background: var(--text);
+      color: white;
+      padding: 6rem 0;
+    }
+
+    .calendar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .calendar-inner .section-tag { color: #e8c89a; }
+
+    .calendar-inner .section-title { color: white; }
+
+    .calendar-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .cal-widget {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2rem;
+    }
+
+    .cal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .cal-month {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+    }
+
+    .cal-nav {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cal-nav:hover { background: var(--terracotta); border-color: var(--terracotta); }
+
+    .cal-days-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .cal-days-header span {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      padding: 0.4rem 0;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      cursor: default;
+      position: relative;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .cal-day.empty { pointer-events: none; }
+
+    .cal-day.booked {
+      background: rgba(193,122,74,0.3);
+      color: rgba(255,255,255,0.4);
+      text-decoration: line-through;
+    }
+
+    .cal-day.available:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .cal-day.today {
+      border: 1px solid var(--terracotta);
+      color: #e8c89a;
+      font-weight: 500;
+    }
+
+    .cal-legend {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+    }
+
+    .legend-dot.available { background: rgba(255,255,255,0.15); }
+    .legend-dot.booked { background: rgba(193,122,74,0.5); }
+
+    .cal-info {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .cal-info p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .cal-loading {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+    }
+
+    .cal-error {
+      font-size: 0.8rem;
+      color: rgba(193,122,74,0.8);
+    }
+
+    .book-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--terracotta);
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 1rem;
+    }
+
+    .book-btn:hover {
+      background: var(--terracotta-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section {
+      background: var(--sand);
+      padding: 6rem 0;
+    }
+
+    .reviews-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .reviews-score {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .score-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--terracotta);
+      line-height: 1;
+    }
+
+    .score-stars {
+      font-size: 1.2rem;
+      color: var(--terracotta);
+    }
+
+    .score-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .review-item {
+      padding: 1.8rem;
+      background: var(--warm-white);
+      border-left: 3px solid var(--terracotta);
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .review-author {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 6rem 0;
+    }
+
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 3rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--sand);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--terracotta);
+    }
+
+    .form-group textarea { min-height: 120px; resize: vertical; }
+
+    .submit-btn {
+      padding: 1rem 2.5rem;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+
+    .submit-btn:hover {
+      background: var(--terracotta-dark);
+      transform: translateY(-2px);
+    }
+
+    .contact-details {
+      padding-top: 0.5rem;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+
+    .detail-icon {
+      font-size: 1.2rem;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    .detail-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .detail-value a {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+
+    .form-success {
+      display: none;
+      padding: 1rem 1.5rem;
+      background: rgba(74, 103, 65, 0.1);
+      border-left: 3px solid var(--forest);
+      font-size: 0.9rem;
+      color: var(--forest);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 400;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--terracotta); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 1.5rem 3.5rem; }
+      .section { padding: 4rem 1.5rem; }
+      .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .intro-image-stack { height: 350px; }
+      .amenities-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:nth-child(1), .gallery-item:nth-child(5) { grid-column: auto; grid-row: auto; }
+      .bedrooms-grid { grid-template-columns: 1fr; }
+      .calendar-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { flex: 1 1 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .amenities-section, .reviews-section { padding: 4rem 0; }
+      .amenities-inner, .reviews-inner, .calendar-inner, .contact-inner { padding: 0 1.5rem; }
+    }
+
+    /* ── TRANSLATIONS ── */
+    [data-lang] { display: none; }
+    .lang-nl [data-lang="nl"],
+    .lang-en [data-lang="en"],
+    .lang-pt [data-lang="pt"] { display: revert; }
+  </style>
+</head>
+<body class="lang-nl">
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">Casa das <span>Árvores</span></a>
+  <ul class="nav-links">
+    <li><a href="#intro" data-lang="nl">Over de woning</a><a href="#intro" data-lang="en">About</a><a href="#intro" data-lang="pt">Sobre</a></li>
+    <li><a href="#voorzieningen" data-lang="nl">Voorzieningen</a><a href="#voorzieningen" data-lang="en">Amenities</a><a href="#voorzieningen" data-lang="pt">Comodidades</a></li>
+    <li><a href="#galerij" data-lang="nl">Galerij</a><a href="#galerij" data-lang="en">Gallery</a><a href="#galerij" data-lang="pt">Galeria</a></li>
+    <li><a href="#beschikbaarheid" data-lang="nl">Beschikbaarheid</a><a href="#beschikbaarheid" data-lang="en">Availability</a><a href="#beschikbaarheid" data-lang="pt">Disponibilidade</a></li>
+    <li><a href="#contact" data-lang="nl">Contact</a><a href="#contact" data-lang="en">Contact</a><a href="#contact" data-lang="pt">Contacto</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('nl')">NL</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Ilha Armona · Algarve · Portugal</span>
+    <h1 class="hero-title">Casa das<br><em>Árvores</em></h1>
+    <p class="hero-subtitle" data-lang="nl">Een unieke vakantiewoning op het autovrije eiland Armona, midden in het Ria Formosa natuurgebied. Rust, zee en ruimte voor het hele gezin.</p>
+    <p class="hero-subtitle" data-lang="en">A unique holiday home on the car-free island of Armona, nestled within the Ria Formosa nature reserve. Tranquillity, sea and space for the whole family.</p>
+    <p class="hero-subtitle" data-lang="pt">Uma casa de férias única na ilha sem automóveis de Armona, no coração da Reserva Natural da Ria Formosa. Paz, mar e espaço para toda a família.</p>
+    <a href="#beschikbaarheid" class="hero-cta" data-lang="nl">Beschikbaarheid bekijken</a>
+    <a href="#beschikbaarheid" class="hero-cta" data-lang="en">Check availability</a>
+    <a href="#beschikbaarheid" class="hero-cta" data-lang="pt">Ver disponibilidade</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number">6</span>
+    <span class="stat-label" data-lang="nl">Gasten</span>
+    <span class="stat-label" data-lang="en">Guests</span>
+    <span class="stat-label" data-lang="pt">Hóspedes</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">3</span>
+    <span class="stat-label" data-lang="nl">Slaapkamers</span>
+    <span class="stat-label" data-lang="en">Bedrooms</span>
+    <span class="stat-label" data-lang="pt">Quartos</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">2</span>
+    <span class="stat-label" data-lang="nl">Badkamers</span>
+    <span class="stat-label" data-lang="en">Bathrooms</span>
+    <span class="stat-label" data-lang="pt">Casas de banho</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">★5,0</span>
+    <span class="stat-label" data-lang="nl">Airbnb beoordeling</span>
+    <span class="stat-label" data-lang="en">Airbnb rating</span>
+    <span class="stat-label" data-lang="pt">Avaliação Airbnb</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">100m</span>
+    <span class="stat-label" data-lang="nl">Van het strand</span>
+    <span class="stat-label" data-lang="en">From the beach</span>
+    <span class="stat-label" data-lang="pt">Da praia</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="section">
+    <div class="intro-grid">
+      <div class="intro-image-stack">
+        <img class="img-main" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/cf1a2966-85a7-4b53-8f0d-2b8e6bc12037.jpeg" alt="Casa das Árvores" />
+        <img class="img-accent" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/25538ba9-5912-4a55-b9d4-9b39a1eb5acd.jpeg" alt="Terras" />
+        <div class="intro-badge">
+          <span class="badge-num">9</span>
+          <span class="badge-txt" data-lang="nl">recensies</span>
+          <span class="badge-txt" data-lang="en">reviews</span>
+          <span class="badge-txt" data-lang="pt">avaliações</span>
+        </div>
+      </div>
+      <div>
+        <p class="section-tag" data-lang="nl">Over de woning</p>
+        <p class="section-tag" data-lang="en">About the home</p>
+        <p class="section-tag" data-lang="pt">Sobre a casa</p>
+        <h2 class="section-title" data-lang="nl">Een oase van rust in de Algarve</h2>
+        <h2 class="section-title" data-lang="en">A tranquil retreat in the Algarve</h2>
+        <h2 class="section-title" data-lang="pt">Um refúgio de paz no Algarve</h2>
+        <div class="section-body">
+          <p data-lang="nl">Casa das Árvores ligt op het autovrije eiland Armona, dat deel uitmaakt van het Ria Formosa natuurgebied aan de oostkust van de Algarve. Het eiland is alleen bereikbaar per veerboot vanuit Olhão (±20 minuten) of met een watertaxi. Olhão zelf ligt op slechts 20 minuten rijden van vliegveld Faro.<br><br>Vanuit de aanlegsteiger is het een aangenaam wandeling van 15 minuten over het hoofdpad naar de woning. Op nog geen 100 meter van het huis begint een houten loopbrug door de duinen, die rechtstreeks naar het strand leidt.</p>
+          <p data-lang="en">Casa das Árvores is located on the car-free island of Armona, part of the Ria Formosa nature reserve on the eastern coast of the Algarve. The island is only accessible by ferry from Olhão (approx. 20 minutes) or by water taxi. Olhão itself is just 20 minutes from Faro Airport.<br><br>From the ferry pier it is a pleasant 15-minute walk along the main path to the house. Less than 100 metres away, a wooden boardwalk winds through the dunes directly to the beach.</p>
+          <p data-lang="pt">A Casa das Árvores situa-se na ilha sem automóveis de Armona, parte da Reserva Natural da Ria Formosa na costa oriental do Algarve. A ilha só é acessível de barco a partir de Olhão (aprox. 20 minutos) ou de táxi aquático. Olhão fica a apenas 20 minutos do Aeroporto de Faro.<br><br>Do cais da balsa são 15 minutos de caminhada pelo caminho principal até à casa. A menos de 100 metros, uma passadeira de madeira atravessa as dunas diretamente até à praia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="voorzieningen" class="amenities-section">
+  <div class="amenities-inner">
+    <p class="section-tag" data-lang="nl">Wat wij bieden</p>
+    <p class="section-tag" data-lang="en">What we offer</p>
+    <p class="section-tag" data-lang="pt">O que oferecemos</p>
+    <h2 class="section-title" data-lang="nl">Volledig uitgerust voor een zorgeloos verblijf</h2>
+    <h2 class="section-title" data-lang="en">Fully equipped for a carefree stay</h2>
+    <h2 class="section-title" data-lang="pt">Totalmente equipada para uma estadia sem preocupações</h2>
+    <div class="amenities-grid">
+      <div class="amenity-card">
+        <div class="amenity-icon">🛋️</div>
+        <div class="amenity-title" data-lang="nl">Woonkamer</div>
+        <div class="amenity-title" data-lang="en">Living Room</div>
+        <div class="amenity-title" data-lang="pt">Sala de estar</div>
+        <p class="amenity-text" data-lang="nl">Comfortabele bank en stoelen, Smart TV, WiFi, airconditioning en een stijlvolle eethoek.</p>
+        <p class="amenity-text" data-lang="en">Comfortable sofa and chairs, Smart TV, WiFi, air conditioning and a stylish dining area.</p>
+        <p class="amenity-text" data-lang="pt">Sofá e cadeiras confortáveis, Smart TV, WiFi, ar condicionado e uma elegante zona de refeições.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🍳</div>
+        <div class="amenity-title" data-lang="nl">Woonkeuken</div>
+        <div class="amenity-title" data-lang="en">Kitchen</div>
+        <div class="amenity-title" data-lang="pt">Cozinha</div>
+        <p class="amenity-text" data-lang="nl">Inductiekookplaat, oven, koel/vrieskast, Nespresso machine en volledig uitgerust met servies en kookgerei.</p>
+        <p class="amenity-text" data-lang="en">Induction hob, oven, fridge/freezer, Nespresso machine, and fully equipped with crockery and cookware.</p>
+        <p class="amenity-text" data-lang="pt">Placa de indução, forno, frigorífico/congelador, máquina Nespresso e totalmente equipada com louça e utensílios.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🛏️</div>
+        <div class="amenity-title" data-lang="nl">Slaapkamers</div>
+        <div class="amenity-title" data-lang="en">Bedrooms</div>
+        <div class="amenity-title" data-lang="pt">Quartos</div>
+        <p class="amenity-text" data-lang="nl">Drie slaapkamers met in totaal 6 bedden. Maximaal 4 volwassenen en 2 kinderen, met twee volledige badkamers.</p>
+        <p class="amenity-text" data-lang="en">Three bedrooms with 6 beds in total. Maximum 4 adults and 2 children, with two full bathrooms.</p>
+        <p class="amenity-text" data-lang="pt">Três quartos com 6 camas no total. Máximo de 4 adultos e 2 crianças, com duas casas de banho completas.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🌿</div>
+        <div class="amenity-title" data-lang="nl">Terrassen</div>
+        <div class="amenity-title" data-lang="en">Terraces</div>
+        <div class="amenity-title" data-lang="pt">Terraços</div>
+        <p class="amenity-text" data-lang="nl">Voor- en achterterras met tafels en stoelen, ligbedden en een BBQ. Kies je zitplaats op de zon.</p>
+        <p class="amenity-text" data-lang="en">Front and rear terrace with tables and chairs, sun loungers and a BBQ. Choose your spot based on the sun.</p>
+        <p class="amenity-text" data-lang="pt">Terraço da frente e de trás com mesas e cadeiras, espreguiçadeiras e churrasqueira. Escolha o lugar conforme o sol.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">☀️</div>
+        <div class="amenity-title" data-lang="nl">Duurzaamheid</div>
+        <div class="amenity-title" data-lang="en">Sustainability</div>
+        <div class="amenity-title" data-lang="pt">Sustentabilidade</div>
+        <p class="amenity-text" data-lang="nl">Warm water via een zonneboiler en zes zonnepanelen op het dak voor duurzame energievoorziening.</p>
+        <p class="amenity-text" data-lang="en">Hot water via a solar boiler and six solar panels on the roof for sustainable energy.</p>
+        <p class="amenity-text" data-lang="pt">Água quente por termossifão solar e seis painéis solares no telhado para energia sustentável.</p>
+      </div>
+      <div class="amenity-card">
+        <div class="amenity-icon">🚢</div>
+        <div class="amenity-title" data-lang="nl">Bereikbaarheid</div>
+        <div class="amenity-title" data-lang="en">Getting here</div>
+        <div class="amenity-title" data-lang="pt">Como chegar</div>
+        <p class="amenity-text" data-lang="nl">Olhão ligt 20 min van Faro Airport. Van Olhão vaart de veerboot in ±20 min naar Armona. De woning is 15 min lopen van de aanlegsteiger.</p>
+        <p class="amenity-text" data-lang="en">Olhão is 20 min from Faro Airport. The ferry from Olhão reaches Armona in approx. 20 min. The house is a 15-min walk from the pier.</p>
+        <p class="amenity-text" data-lang="pt">Olhão fica a 20 min do Aeroporto de Faro. O barco de Olhão chega a Armona em aprox. 20 min. A casa fica a 15 min a pé do cais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galerij">
+  <div class="section">
+    <p class="section-tag" data-lang="nl">De woning in beeld</p>
+    <p class="section-tag" data-lang="en">In pictures</p>
+    <p class="section-tag" data-lang="pt">Em imagens</p>
+    <h2 class="section-title" data-lang="nl">Sfeer en ruimte</h2>
+    <h2 class="section-title" data-lang="en">Atmosphere &amp; space</h2>
+    <h2 class="section-title" data-lang="pt">Ambiente e espaço</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/5d45b621-4b53-493c-9032-d01d76e19a66.jpeg" alt="Buitenkant" /></div>
+      <div class="gallery-item"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/cf1a2966-85a7-4b53-8f0d-2b8e6bc12037.jpeg" alt="Woonkamer" /></div>
+      <div class="gallery-item"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/25538ba9-5912-4a55-b9d4-9b39a1eb5acd.jpeg" alt="Keuken" /></div>
+      <div class="gallery-item"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/a5e48bd4-1baf-4345-94c7-1ca6c4463b1f.jpeg" alt="Slaapkamer 1" /></div>
+      <div class="gallery-item"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/7142ca27-9389-4ee4-8870-e3baa5dedba2.jpeg" alt="Terras" /></div>
+      <div class="gallery-item"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/1d1818e7-3a73-4757-be97-e8a140045fe1.jpeg" alt="Slaapkamer 2" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEDROOMS -->
+<section>
+  <div class="section" style="padding-top: 0;">
+    <p class="section-tag" data-lang="nl">Slapen</p>
+    <p class="section-tag" data-lang="en">Sleeping</p>
+    <p class="section-tag" data-lang="pt">Dormir</p>
+    <h2 class="section-title" data-lang="nl">Drie slaapkamers</h2>
+    <h2 class="section-title" data-lang="en">Three bedrooms</h2>
+    <h2 class="section-title" data-lang="pt">Três quartos</h2>
+    <div class="bedrooms-grid">
+      <div class="bedroom-card">
+        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/a5e48bd4-1baf-4345-94c7-1ca6c4463b1f.jpeg" alt="Slaapkamer 1" />
+        <div class="bedroom-info">
+          <h3 data-lang="nl">Slaapkamer 1</h3>
+          <h3 data-lang="en">Bedroom 1</h3>
+          <h3 data-lang="pt">Quarto 1</h3>
+          <p data-lang="nl">Twee losse eenpersoonsbedden (190×90 cm) met hangkast</p>
+          <p data-lang="en">Two single beds (190×90 cm) with wardrobe</p>
+          <p data-lang="pt">Duas camas individuais (190×90 cm) com roupeiro</p>
+        </div>
+      </div>
+      <div class="bedroom-card">
+        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/1d1818e7-3a73-4757-be97-e8a140045fe1.jpeg" alt="Slaapkamer 2" />
+        <div class="bedroom-info">
+          <h3 data-lang="nl">Slaapkamer 2</h3>
+          <h3 data-lang="en">Bedroom 2</h3>
+          <h3 data-lang="pt">Quarto 2</h3>
+          <p data-lang="nl">Eén los bed en een stapelbed met kast. Deuren naar de woonkamer.</p>
+          <p data-lang="en">One single bed and one bunk bed with wardrobe. Doors to living room.</p>
+          <p data-lang="pt">Uma cama individual e uma beliche com armário. Portas para a sala.</p>
+        </div>
+      </div>
+      <div class="bedroom-card">
+        <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Mjc2MjU2MjQ%3D/original/031931e9-6be8-473f-b9e3-513dd8759757.jpeg" alt="Slaapkamer 3" />
+        <div class="bedroom-info">
+          <h3 data-lang="nl">Slaapkamer 3</h3>
+          <h3 data-lang="en">Bedroom 3</h3>
+          <h3 data-lang="pt">Quarto 3</h3>
+          <p data-lang="nl">Tweepersoonsbed met eigen badkamer (en-suite) met inloopdouche</p>
+          <p data-lang="en">Double bed with en-suite bathroom featuring a walk-in shower</p>
+          <p data-lang="pt">Cama de casal com casa de banho privativa (en-suite) com duche</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="beschikbaarheid" class="calendar-section">
+  <div class="calendar-inner">
+    <p class="section-tag" data-lang="nl">Planning</p>
+    <p class="section-tag" data-lang="en">Planning</p>
+    <p class="section-tag" data-lang="pt">Planeamento</p>
+    <h2 class="section-title" data-lang="nl">Beschikbaarheid</h2>
+    <h2 class="section-title" data-lang="en">Availability</h2>
+    <h2 class="section-title" data-lang="pt">Disponibilidade</h2>
+    <div class="calendar-layout">
+      <div>
+        <div class="cal-widget">
+          <div class="cal-header">
+            <button class="cal-nav" onclick="prevMonth()">&#8249;</button>
+            <span class="cal-month" id="cal-month-label">Laden…</span>
+            <button class="cal-nav" onclick="nextMonth()">&#8250;</button>
+          </div>
+          <div class="cal-days-header">
+            <span data-lang="nl">Ma</span><span data-lang="nl">Di</span><span data-lang="nl">Wo</span><span data-lang="nl">Do</span><span data-lang="nl">Vr</span><span data-lang="nl">Za</span><span data-lang="nl">Zo</span>
+            <span data-lang="en">Mo</span><span data-lang="en">Tu</span><span data-lang="en">We</span><span data-lang="en">Th</span><span data-lang="en">Fr</span><span data-lang="en">Sa</span><span data-lang="en">Su</span>
+            <span data-lang="pt">Se</span><span data-lang="pt">Te</span><span data-lang="pt">Qu</span><span data-lang="pt">Qu</span><span data-lang="pt">Se</span><span data-lang="pt">Sá</span><span data-lang="pt">Do</span>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-legend">
+            <div class="legend-item"><div class="legend-dot available"></div><span data-lang="nl">Beschikbaar</span><span data-lang="en">Available</span><span data-lang="pt">Disponível</span></div>
+            <div class="legend-item"><div class="legend-dot booked"></div><span data-lang="nl">Bezet</span><span data-lang="en">Booked</span><span data-lang="pt">Reservado</span></div>
+          </div>
+        </div>
+        <p class="cal-loading" id="cal-status" style="margin-top:1rem;"></p>
+      </div>
+      <div class="cal-info">
+        <p data-lang="nl">De kalender is rechtstreeks gekoppeld aan de Airbnb-agenda. Bezette dagen zijn up-to-date vanuit de actuele reserveringen op Airbnb.</p>
+        <p data-lang="en">The calendar is directly linked to the Airbnb agenda. Booked dates are kept up to date from current reservations on Airbnb.</p>
+        <p data-lang="pt">O calendário está ligado diretamente à agenda do Airbnb. As datas reservadas são atualizadas em tempo real a partir das reservas no Airbnb.</p>
+        <br/>
+        <p data-lang="nl"><strong style="color:white;">Aankomst:</strong> vanaf 15:00<br/><strong style="color:white;">Vertrek:</strong> voor 10:00<br/><strong style="color:white;">Max. gasten:</strong> 6 personen</p>
+        <p data-lang="en"><strong style="color:white;">Check-in:</strong> from 15:00<br/><strong style="color:white;">Check-out:</strong> before 10:00<br/><strong style="color:white;">Max. guests:</strong> 6 persons</p>
+        <p data-lang="pt"><strong style="color:white;">Check-in:</strong> a partir das 15:00<br/><strong style="color:white;">Check-out:</strong> antes das 10:00<br/><strong style="color:white;">Máx. hóspedes:</strong> 6 pessoas</p>
+        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" data-lang="nl">Boek via Airbnb</a>
+        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" data-lang="en">Book via Airbnb</a>
+        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" data-lang="pt">Reservar via Airbnb</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <p class="section-tag" data-lang="nl">Wat gasten zeggen</p>
+    <p class="section-tag" data-lang="en">What guests say</p>
+    <p class="section-tag" data-lang="pt">O que os hóspedes dizem</p>
+    <h2 class="section-title" data-lang="nl">Recensies</h2>
+    <h2 class="section-title" data-lang="en">Reviews</h2>
+    <h2 class="section-title" data-lang="pt">Avaliações</h2>
+    <div class="reviews-score">
+      <span class="score-big">5,0</span>
+      <div>
+        <div class="score-stars">★★★★★</div>
+        <div class="score-label" data-lang="nl">Gemiddeld op basis van 9 Airbnb-recensies</div>
+        <div class="score-label" data-lang="en">Average based on 9 Airbnb reviews</div>
+        <div class="score-label" data-lang="pt">Média com base em 9 avaliações do Airbnb</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-item">
+        <p class="review-text" data-lang="nl">"Prachtige locatie op het eiland. Het huis is knus en goed uitgerust. De communicatie met de host was uitstekend."</p>
+        <p class="review-text" data-lang="en">"Beautiful location on the island. The house is cosy and well-equipped. Communication with the host was excellent."</p>
+        <p class="review-text" data-lang="pt">"Localização fantástica na ilha. A casa é acolhedora e bem equipada. A comunicação com o anfitrião foi excelente."</p>
+        <span class="review-author">— Airbnb gast, 2024</span>
+      </div>
+      <div class="review-item">
+        <p class="review-text" data-lang="nl">"Ideaal voor een gezinsvakantie. De kinderen vonden het strand geweldig, en wij genoten van de rust en het terras."</p>
+        <p class="review-text" data-lang="en">"Ideal for a family holiday. The kids loved the beach, and we enjoyed the peace and quiet and the terrace."</p>
+        <p class="review-text" data-lang="pt">"Ideal para umas férias em família. Os miúdos adoraram a praia e nós desfrutámos da tranquilidade e do terraço."</p>
+        <span class="review-author">— Airbnb gast, 2024</span>
+      </div>
+      <div class="review-item">
+        <p class="review-text" data-lang="nl">"Het autovrije eiland geeft een gevoel van totale ontspanning. De houten loopbrug naar het strand is prachtig."</p>
+        <p class="review-text" data-lang="en">"The car-free island gives a feeling of complete relaxation. The wooden boardwalk to the beach is beautiful."</p>
+        <p class="review-text" data-lang="pt">"A ilha sem carros proporciona uma sensação de descanso total. A passadeira de madeira para a praia é linda."</p>
+        <span class="review-author">— Airbnb gast, 2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <p class="section-tag" data-lang="nl">Neem contact op</p>
+    <p class="section-tag" data-lang="en">Get in touch</p>
+    <p class="section-tag" data-lang="pt">Entre em contacto</p>
+    <h2 class="section-title" data-lang="nl">Vragen of informatie?</h2>
+    <h2 class="section-title" data-lang="en">Questions or information?</h2>
+    <h2 class="section-title" data-lang="pt">Perguntas ou informações?</h2>
+    <div class="contact-layout">
+      <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-lang="nl">Voornaam</label>
+            <label data-lang="en">First name</label>
+            <label data-lang="pt">Nome</label>
+            <input type="text" name="firstname" required />
+          </div>
+          <div class="form-group">
+            <label data-lang="nl">Achternaam</label>
+            <label data-lang="en">Last name</label>
+            <label data-lang="pt">Apelido</label>
+            <input type="text" name="lastname" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" name="email" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-lang="nl">Aankomstdatum</label>
+            <label data-lang="en">Arrival date</label>
+            <label data-lang="pt">Data de chegada</label>
+            <input type="date" name="checkin" />
+          </div>
+          <div class="form-group">
+            <label data-lang="nl">Vertrekdatum</label>
+            <label data-lang="en">Departure date</label>
+            <label data-lang="pt">Data de partida</label>
+            <input type="date" name="checkout" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-lang="nl">Bericht</label>
+          <label data-lang="en">Message</label>
+          <label data-lang="pt">Mensagem</label>
+          <textarea name="message"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" data-lang="nl">Verstuur bericht</button>
+        <button type="submit" class="submit-btn" data-lang="en">Send message</button>
+        <button type="submit" class="submit-btn" data-lang="pt">Enviar mensagem</button>
+        <div class="form-success" id="formSuccess">
+          <span data-lang="nl">Uw bericht is verzonden. Wij nemen zo snel mogelijk contact op.</span>
+          <span data-lang="en">Your message has been sent. We will get back to you as soon as possible.</span>
+          <span data-lang="pt">A sua mensagem foi enviada. Entraremos em contacto o mais brevemente possível.</span>
+        </div>
+      </form>
+      <div class="contact-details">
+        <div class="contact-detail-item">
+          <span class="detail-icon">📍</span>
+          <div>
+            <div class="detail-label" data-lang="nl">Adres</div>
+            <div class="detail-label" data-lang="en">Address</div>
+            <div class="detail-label" data-lang="pt">Morada</div>
+            <div class="detail-value">Ilha Armona 352<br/>Olhão, Faro<br/>8700-282 Portugal</div>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <span class="detail-icon">📞</span>
+          <div>
+            <div class="detail-label" data-lang="nl">Telefoon</div>
+            <div class="detail-label" data-lang="en">Phone</div>
+            <div class="detail-label" data-lang="pt">Telefone</div>
+            <div class="detail-value"><a href="tel:+31625218201">+31 6 25 21 82 01</a></div>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <span class="detail-icon">✉️</span>
+          <div>
+            <div class="detail-label">E-mail</div>
+            <div class="detail-value"><a href="mailto:bertverboom@gmail.com">bertverboom@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <span class="detail-icon">🏠</span>
+          <div>
+            <div class="detail-label">Airbnb</div>
+            <div class="detail-value"><a href="https://www.airbnb.nl/rooms/27625624" target="_blank" data-lang="nl">Bekijk de listing</a><a href="https://www.airbnb.nl/rooms/27625624" target="_blank" data-lang="en">View the listing</a><a href="https://www.airbnb.nl/rooms/27625624" target="_blank" data-lang="pt">Ver o anúncio</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Casa das Árvores</span>
+  <div class="footer-links">
+    <a href="#intro" data-lang="nl">De woning</a><a href="#intro" data-lang="en">The home</a><a href="#intro" data-lang="pt">A casa</a>
+    <a href="#galerij" data-lang="nl">Galerij</a><a href="#galerij" data-lang="en">Gallery</a><a href="#galerij" data-lang="pt">Galeria</a>
+    <a href="#beschikbaarheid" data-lang="nl">Beschikbaarheid</a><a href="#beschikbaarheid" data-lang="en">Availability</a><a href="#beschikbaarheid" data-lang="pt">Disponibilidade</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <span>Ilha Armona, Portugal</span>
+</footer>
+
+<script>
+  // ── LANGUAGE SWITCHER ──
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    renderCalendar();
+  }
+
+  function currentLang() {
+    return document.body.className.replace('lang-','');
+  }
+
+  // ── CALENDAR ──
+  let calYear, calMonth;
+  let bookedDates = new Set();
+
+  const MONTH_NAMES = {
+    nl: ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
+    en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+    pt: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
+  };
+
+  function initCalendar() {
+    const now = new Date();
+    calYear = now.getFullYear();
+    calMonth = now.getMonth();
+    loadIcal();
+  }
+
+  async function loadIcal() {
+    const statusEl = document.getElementById('cal-status');
+    // Use a CORS proxy to fetch the Airbnb iCal feed
+    const icalUrl = 'https://www.airbnb.nl/calendar/ical/27625624.ics?s=dd993d0d91cef80d93d7df40d2a00cfe';
+    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(icalUrl);
+
+    try {
+      const res = await fetch(proxyUrl);
+      const data = await res.json();
+      parseIcal(data.contents);
+      statusEl.textContent = '';
+    } catch(e) {
+      // Fallback: show calendar without booked data
+      statusEl.className = 'cal-error';
+      const lang = currentLang();
+      statusEl.textContent = lang === 'nl' ? '⚠ Agenda kon niet worden geladen. Controleer beschikbaarheid via Airbnb.'
+        : lang === 'en' ? '⚠ Calendar could not be loaded. Check availability via Airbnb.'
+        : '⚠ O calendário não pôde ser carregado. Verifique a disponibilidade no Airbnb.';
+    }
+    renderCalendar();
+  }
+
+  function parseIcal(text) {
+    if (!text) return;
+    const lines = text.split(/\r?\n/);
+    let inEvent = false;
+    let dtStart = null, dtEnd = null;
+
+    for (const line of lines) {
+      if (line.startsWith('BEGIN:VEVENT')) { inEvent = true; dtStart = null; dtEnd = null; }
+      if (!inEvent) continue;
+      if (line.startsWith('DTSTART')) {
+        const val = line.split(':')[1]?.trim();
+        if (val) dtStart = parseIcalDate(val);
+      }
+      if (line.startsWith('DTEND')) {
+        const val = line.split(':')[1]?.trim();
+        if (val) dtEnd = parseIcalDate(val);
+      }
+      if (line.startsWith('END:VEVENT') && dtStart && dtEnd) {
+        let cur = new Date(dtStart);
+        while (cur < dtEnd) {
+          bookedDates.add(cur.toISOString().slice(0,10));
+          cur.setDate(cur.getDate() + 1);
+        }
+        inEvent = false;
+      }
+    }
+  }
+
+  function parseIcalDate(str) {
+    const s = str.replace(/[TZ]/g,'');
+    const y = s.slice(0,4), m = s.slice(4,6), d = s.slice(6,8);
+    return new Date(`${y}-${m}-${d}T00:00:00`);
+  }
+
+  function renderCalendar() {
+    const lang = currentLang();
+    const grid = document.getElementById('cal-grid');
+    const label = document.getElementById('cal-month-label');
+    if (!grid || !label) return;
+
+    label.textContent = (MONTH_NAMES[lang] || MONTH_NAMES.nl)[calMonth] + ' ' + calYear;
+
+    const firstDay = new Date(calYear, calMonth, 1);
+    // Monday-first: Sunday = 6, Monday = 0
+    let startPad = firstDay.getDay() - 1;
+    if (startPad < 0) startPad = 6;
+
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0,10);
+
+    let html = '';
+    for (let i = 0; i < startPad; i++) {
+      html += '<div class="cal-day empty"></div>';
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const isBooked = bookedDates.has(dateStr);
+      const isToday = dateStr === todayStr;
+      const cls = ['cal-day', isBooked ? 'booked' : 'available', isToday ? 'today' : ''].join(' ').trim();
+      html += `<div class="${cls}">${d}</div>`;
+    }
+    grid.innerHTML = html;
+  }
+
+  function prevMonth() {
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  }
+
+  function nextMonth() {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+  }
+
+  // ── CONTACT FORM ──
+  function submitForm(e) {
+    e.preventDefault();
+    // Mailto fallback – opens default mail client with prefilled fields
+    const f = e.target;
+    const name = f.firstname.value + ' ' + f.lastname.value;
+    const email = f.email.value;
+    const checkin = f.checkin.value;
+    const checkout = f.checkout.value;
+    const msg = f.message.value;
+    const subject = encodeURIComponent('Vraag Casa das Árvores - ' + name);
+    const body = encodeURIComponent(`Naam: ${name}\nE-mail: ${email}\nAankomst: ${checkin}\nVertrek: ${checkout}\n\n${msg}`);
+    window.location.href = `mailto:bertverboom@gmail.com?subject=${subject}&body=${body}`;
+    document.getElementById('formSuccess').style.display = 'block';
+    f.reset();
+  }
+
+  // ── INIT ──
+  initCalendar();
+</script>
+
+</body>
+</html>
