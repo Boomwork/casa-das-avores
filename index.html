@@ -801,14 +801,23 @@
       font-size: 0.78rem;
       cursor: default;
       color: rgba(255,255,255,0.6);
+      position: relative;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .cal-day.empty { pointer-events: none; }
 
     .cal-day.booked {
-      background: rgba(184,150,90,0.15);
-      color: rgba(255,255,255,0.25);
-      text-decoration: line-through;
+      color: rgba(255,255,255,0.22);
+    }
+    .cal-day.booked::after {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(200, 70, 70, 0.75);
+      flex-shrink: 0;
     }
 
     .cal-day.available:hover {
@@ -841,7 +850,7 @@
     }
 
     .legend-dot.available { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); }
-    .legend-dot.booked { background: rgba(184,150,90,0.3); }
+    .legend-dot.booked { background: rgba(200,70,70,0.75); border-radius: 50%; }
 
     .cal-info { color: rgba(255,255,255,0.6); }
 
@@ -2295,23 +2304,31 @@
 
   async function loadIcal() {
     const statusEl = document.getElementById('cal-status');
-    const icalUrl = 'https://www.airbnb.nl/calendar/ical/27625624.ics?s=dd993d0d91cef80d93d7df40d2a00cfe';
-    // Proxies: raw endpoint first (direct text), then JSON-wrapped fallbacks
-    const proxies = [
-      'https://api.allorigins.win/raw?url=' + encodeURIComponent(icalUrl),
-      'https://api.allorigins.win/get?url=' + encodeURIComponent(icalUrl),
-      'https://corsproxy.io/?' + encodeURIComponent(icalUrl),
-      'https://proxy.cors.sh/' + icalUrl,
+    // Try both .nl and .com — one may be blocked by a proxy while the other works
+    const icalUrls = [
+      'https://www.airbnb.nl/calendar/ical/27625624.ics?s=dd993d0d91cef80d93d7df40d2a00cfe',
+      'https://www.airbnb.com/calendar/ical/27625624.ics?s=dd993d0d91cef80d93d7df40d2a00cfe',
     ];
+    const proxyFns = [
+      u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+      u => 'https://api.allorigins.win/get?url='  + encodeURIComponent(u),
+      u => 'https://corsproxy.io/?' + encodeURIComponent(u),
+      u => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u),
+      u => 'https://thingproxy.freeboard.io/fetch/' + u,
+    ];
+    // Build attempts: each proxy with each URL
+    const attempts = [];
+    for (const u of icalUrls) for (const fn of proxyFns) attempts.push(fn(u));
+
     let loaded = false;
-    bookedDates = new Set(); // reset before load
-    for (const proxyUrl of proxies) {
+    bookedDates = new Set();
+    for (const proxyUrl of attempts) {
       try {
         const res = await fetch(proxyUrl, { cache: 'no-cache' });
         if (!res.ok) continue;
         const raw = await res.text();
-        // allorigins /get wraps content in JSON {contents: "..."}
         let icalText = raw;
+        // allorigins /get wraps content in JSON {contents:"..."}
         if (raw.trimStart().startsWith('{')) {
           try { const j = JSON.parse(raw); if (j.contents) icalText = j.contents; } catch {}
         }
@@ -2321,7 +2338,7 @@
           loaded = true;
           break;
         }
-      } catch(e) { /* try next proxy */ }
+      } catch(e) { /* try next */ }
     }
     if (!loaded) {
       const lang = currentLang();
