@@ -268,8 +268,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, rgba(17,30,53,0.35) 0%, transparent 22%),
-        linear-gradient(to top, rgba(17,30,53,0.88) 0%, rgba(17,30,53,0.4) 40%, transparent 70%);
+        linear-gradient(to bottom, rgba(17,30,53,0.6) 0%, rgba(17,30,53,0.2) 30%, transparent 55%),
+        linear-gradient(to top, rgba(17,30,53,0.95) 0%, rgba(17,30,53,0.65) 35%, rgba(17,30,53,0.3) 60%, transparent 80%),
+        linear-gradient(to right, rgba(17,30,53,0.55) 0%, rgba(17,30,53,0.15) 50%, transparent 75%);
     }
 
     /* cinematic grain */
@@ -311,6 +312,7 @@
       text-transform: uppercase;
       color: var(--gold-light);
       margin-bottom: 1.2rem;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
     }
     .hero-tag .char {
       display: inline-block;
@@ -326,6 +328,7 @@
       line-height: 1.0;
       color: white;
       margin-bottom: 1.4rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5), 0 4px 40px rgba(0,0,0,0.3);
     }
 
     .hero-title em {
@@ -348,11 +351,12 @@
 
     .hero-subtitle {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.72);
+      color: rgba(255,255,255,0.88);
       letter-spacing: 0.04em;
       margin-bottom: 2.8rem;
       max-width: 460px;
       line-height: 1.8;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
     }
 
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -549,32 +553,10 @@
       top: 55%;
       left: 58%;
       transform: translate(-50%, -50%);
-      width: 100px;
-      height: 100px;
-      background: var(--navy);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      color: white;
-      text-align: center;
+      width: 110px;
+      height: 110px;
       z-index: 2;
-      box-shadow: 0 8px 32px rgba(27,45,79,0.35);
-    }
-
-    .intro-badge .badge-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.7rem;
-      line-height: 1;
-      color: var(--gold-light);
-    }
-
-    .intro-badge .badge-txt {
-      font-size: 0.52rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.7;
+      filter: drop-shadow(0 8px 24px rgba(27,45,79,0.4));
     }
 
     /* ── DIVIDER ── */
@@ -1229,6 +1211,9 @@
     .lang-nl [data-lang="nl"],
     .lang-en [data-lang="en"],
     .lang-pt [data-lang="pt"] { display: revert; }
+    .lang-nl .book-btn[data-lang="nl"],
+    .lang-en .book-btn[data-lang="en"],
+    .lang-pt .book-btn[data-lang="pt"] { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; }
 
     /* ── STATS ICONS ── */
     .stat-icon { color: var(--gold-light); margin-bottom: 0.5rem; display: flex; justify-content: center; }
@@ -1266,13 +1251,10 @@
     /* ── GALLERY EDITORIAL ── */
     .gallery-editorial {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 280px 280px;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 280px 240px;
       gap: 6px;
       margin-top: 4rem;
-    }
-    .gallery-editorial .gallery-item:first-child {
-      grid-row: 1 / 3;
     }
     .gallery-item-overlay {
       position: absolute; inset: 0;
@@ -1461,7 +1443,6 @@
       .island-photo { height: 280px; }
       .amenities-grid { grid-template-columns: 1fr; }
       .gallery-editorial { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-      .gallery-editorial .gallery-item:first-child { grid-row: auto; }
       .bedrooms-grid { grid-template-columns: 1fr; }
       .cal-dual { grid-template-columns: 1fr; }
       .calendar-layout { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -1602,10 +1583,34 @@
         <img class="img-main parallax-img" data-speed="0.04" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/cf1a2966-85a7-4b53-8f0d-2b8e6bc12037.jpeg" alt="Casa das Árvores" />
         <img class="img-accent" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/25538ba9-5912-4a55-b9d4-9b39a1eb5acd.jpeg" alt="Terras" />
         <div class="intro-badge">
-          <span class="badge-num">9</span>
-          <span class="badge-txt" data-lang="nl">recensies</span>
-          <span class="badge-txt" data-lang="en">reviews</span>
-          <span class="badge-txt" data-lang="pt">avaliações</span>
+          <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" width="110" height="110">
+            <!-- background circle -->
+            <circle cx="55" cy="55" r="54" fill="#1b2d4f" />
+            <!-- outer ring -->
+            <circle cx="55" cy="55" r="50" fill="none" stroke="#b8965a" stroke-width="1" stroke-dasharray="3 4" />
+            <!-- inner ring -->
+            <circle cx="55" cy="55" r="44" fill="none" stroke="rgba(184,150,90,0.35)" stroke-width="0.5" />
+            <!-- curved text top: ILHA ARMONA -->
+            <path id="topArc" d="M 16,55 A 39,39 0 0,1 94,55" fill="none" />
+            <text font-family="Raleway,sans-serif" font-size="7.5" letter-spacing="3" fill="#d4b07a" text-anchor="middle">
+              <textPath href="#topArc" startOffset="50%">ILHA ARMONA</textPath>
+            </text>
+            <!-- curved text bottom: ALGARVE · PORTUGAL -->
+            <path id="botArc" d="M 16,57 A 39,39 0 0,0 94,57" fill="none" />
+            <text font-family="Raleway,sans-serif" font-size="6.5" letter-spacing="2" fill="rgba(212,176,122,0.65)" text-anchor="middle">
+              <textPath href="#botArc" startOffset="50%">ALGARVE · PORTUGAL</textPath>
+            </text>
+            <!-- sun icon center -->
+            <circle cx="55" cy="51" r="7" fill="none" stroke="#b8965a" stroke-width="1.2" />
+            <line x1="55" y1="38" x2="55" y2="41" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="55" y1="61" x2="55" y2="64" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="42" y1="51" x2="45" y2="51" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="65" y1="51" x2="68" y2="51" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="46.1" y1="42.1" x2="48.2" y2="44.2" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="61.8" y1="57.8" x2="63.9" y2="59.9" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="63.9" y1="42.1" x2="61.8" y2="44.2" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="48.2" y1="57.8" x2="46.1" y2="59.9" stroke="#b8965a" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
         </div>
       </div>
       <div class="section-num-wrap">
@@ -1641,14 +1646,14 @@
     <p class="section-tag reveal" data-lang="nl">Het eiland</p>
     <p class="section-tag reveal" data-lang="en">The island</p>
     <p class="section-tag reveal" data-lang="pt">A ilha</p>
-    <h2 class="section-title reveal" data-lang="nl">Armona — een eiland buiten de tijd</h2>
-    <h2 class="section-title reveal" data-lang="en">Armona — an island beyond time</h2>
-    <h2 class="section-title reveal" data-lang="pt">Armona — uma ilha fora do tempo</h2>
+    <h2 class="section-title reveal" data-lang="nl">Armona: een eiland buiten de tijd</h2>
+    <h2 class="section-title reveal" data-lang="en">Armona: an island beyond time</h2>
+    <h2 class="section-title reveal" data-lang="pt">Armona: uma ilha fora do tempo</h2>
     <div class="island-grid">
       <div>
-        <p class="section-body reveal" data-lang="nl">Geen auto's, geen lawaai — alleen natuur, zee en de stilte van het Ria Formosa reservaat. Armona is een van de mooiste en minst bekende eilanden van de Algarve, waar kinderen vrij kunnen spelen en volwassenen echt tot rust komen.</p>
-        <p class="section-body reveal" data-lang="en">No cars, no noise — just nature, sea and the silence of the Ria Formosa reserve. Armona is one of the most beautiful and least-known islands of the Algarve, where children can roam freely and adults truly unwind.</p>
-        <p class="section-body reveal" data-lang="pt">Sem carros, sem barulho — apenas natureza, mar e o silêncio da Reserva Natural da Ria Formosa. Armona é uma das ilhas mais belas e menos conhecidas do Algarve, onde as crianças brincam livremente e os adultos descansam de verdade.</p>
+        <p class="section-body reveal" data-lang="nl">Geen auto's, geen lawaai. Alleen natuur, zee en de stilte van het Ria Formosa reservaat. Armona is een van de mooiste en minst bekende eilanden van de Algarve, waar kinderen vrij kunnen spelen en volwassenen echt tot rust komen.</p>
+        <p class="section-body reveal" data-lang="en">No cars, no noise. Just nature, sea and the silence of the Ria Formosa reserve. Armona is one of the most beautiful and least-known islands of the Algarve, where children can roam freely and adults truly unwind.</p>
+        <p class="section-body reveal" data-lang="pt">Sem carros, sem barulho. Apenas natureza, mar e o silêncio da Reserva Natural da Ria Formosa. Armona é uma das ilhas mais belas e menos conhecidas do Algarve, onde as crianças brincam livremente e os adultos descansam de verdade.</p>
         <div class="island-icon-grid" style="margin-top:2rem;">
           <div class="island-feature reveal"><i data-lucide="waves"></i><span data-lang="nl">Oceaanstrand op loopafstand</span><span data-lang="en">Ocean beach within walking distance</span><span data-lang="pt">Praia oceânica a pé</span></div>
           <div class="island-feature reveal"><i data-lucide="bird"></i><span data-lang="nl">Ria Formosa natuurgebied</span><span data-lang="en">Ria Formosa nature reserve</span><span data-lang="pt">Reserva natural Ria Formosa</span></div>
@@ -1753,9 +1758,9 @@
       <div class="amenity-card reveal">
         <div class="amenity-icon"><i data-lucide="flame"></i></div>
         <div class="amenity-title">BBQ</div>
-        <p class="amenity-text" data-lang="nl">BBQ op het terras — perfect voor zomeravonden.</p>
-        <p class="amenity-text" data-lang="en">BBQ on the terrace — perfect for summer evenings.</p>
-        <p class="amenity-text" data-lang="pt">Churrasqueira no terraço — perfeita para noites de verão.</p>
+        <p class="amenity-text" data-lang="nl">BBQ op het terras, perfect voor zomeravonden.</p>
+        <p class="amenity-text" data-lang="en">BBQ on the terrace, perfect for summer evenings.</p>
+        <p class="amenity-text" data-lang="pt">Churrasqueira no terraço, perfeita para noites de verão.</p>
       </div>
     </div>
   </div>
@@ -1934,15 +1939,15 @@
         <p data-lang="en"><i data-lucide="clock" style="width:14px;height:14px;stroke:var(--gold-light);vertical-align:middle;margin-right:4px;"></i><strong>Check-in:</strong> from 15:00 &nbsp;·&nbsp; <strong>Check-out:</strong> before 10:00 &nbsp;·&nbsp; <strong>Max.:</strong> 6 persons</p>
         <p data-lang="pt"><i data-lucide="clock" style="width:14px;height:14px;stroke:var(--gold-light);vertical-align:middle;margin-right:4px;"></i><strong>Check-in:</strong> 15:00 &nbsp;·&nbsp; <strong>Check-out:</strong> 10:00 &nbsp;·&nbsp; <strong>Máx.:</strong> 6 pessoas</p>
         <div class="cal-next-avail" id="calNextAvail" style="display:none;"><i data-lucide="calendar-check"></i><span id="calNextAvailText"></span></div>
-        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" style="display:inline-flex;align-items:center;gap:0.6rem;margin-top:1.5rem;" data-lang="nl">
+        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" data-lang="nl">
           <svg class="airbnb-logo" viewBox="0 0 24 24" fill="#FF5A5F"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4.5 11.5c-.23 1.03-2.1 2-4.5 2s-4.27-.97-4.5-2c-.14-.61.07-1.22.5-1.72l2-2.34c.23-.27.35-.59.31-.91l-.2-1.97c-.07-.62.38-1.06.89-1.06s.96.44.89 1.06l-.2 1.97c-.04.32.08.64.31.91l2 2.34c.43.5.64 1.11.5 1.72z"/></svg>
           Boek via Airbnb
         </a>
-        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" style="display:inline-flex;align-items:center;gap:0.6rem;margin-top:1.5rem;" data-lang="en">
+        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" data-lang="en">
           <svg class="airbnb-logo" viewBox="0 0 24 24" fill="#FF5A5F"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4.5 11.5c-.23 1.03-2.1 2-4.5 2s-4.27-.97-4.5-2c-.14-.61.07-1.22.5-1.72l2-2.34c.23-.27.35-.59.31-.91l-.2-1.97c-.07-.62.38-1.06.89-1.06s.96.44.89 1.06l-.2 1.97c-.04.32.08.64.31.91l2 2.34c.43.5.64 1.11.5 1.72z"/></svg>
           Book via Airbnb
         </a>
-        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" style="display:inline-flex;align-items:center;gap:0.6rem;margin-top:1.5rem;" data-lang="pt">
+        <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" data-lang="pt">
           <svg class="airbnb-logo" viewBox="0 0 24 24" fill="#FF5A5F"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4.5 11.5c-.23 1.03-2.1 2-4.5 2s-4.27-.97-4.5-2c-.14-.61.07-1.22.5-1.72l2-2.34c.23-.27.35-.59.31-.91l-.2-1.97c-.07-.62.38-1.06.89-1.06s.96.44.89 1.06l-.2 1.97c-.04.32.08.64.31.91l2 2.34c.43.5.64 1.11.5 1.72z"/></svg>
           Reservar via Airbnb
         </a>
@@ -1993,7 +1998,7 @@
         <p class="review-text" data-lang="nl">"Prachtige locatie op het eiland. Het huis is knus en goed uitgerust. De communicatie met de host was uitstekend."</p>
         <p class="review-text" data-lang="en">"Beautiful location on the island. The house is cosy and well-equipped. Communication with the host was excellent."</p>
         <p class="review-text" data-lang="pt">"Localização fantástica na ilha. A casa é acolhedora e bem equipada. A comunicação com o anfitrião foi excelente."</p>
-        <span class="review-author">— Sandra · Airbnb · 2024</span>
+        <span class="review-author">Sandra · Airbnb · 2024</span>
       </div>
       <div class="review-item reveal">
         <div class="review-stars">★ ★ ★ ★ ★</div>
@@ -2001,7 +2006,7 @@
         <p class="review-text" data-lang="nl">"Ideaal voor een gezinsvakantie. De kinderen vonden het strand geweldig, en wij genoten van de rust en het terras."</p>
         <p class="review-text" data-lang="en">"Ideal for a family holiday. The kids loved the beach, and we enjoyed the peace and quiet and the terrace."</p>
         <p class="review-text" data-lang="pt">"Ideal para umas férias em família. Os miúdos adoraram a praia e nós desfrutámos da tranquilidade e do terraço."</p>
-        <span class="review-author">— Mark · Airbnb · 2024</span>
+        <span class="review-author">Mark · Airbnb · 2024</span>
       </div>
       <div class="review-item reveal">
         <div class="review-stars">★ ★ ★ ★ ★</div>
@@ -2009,7 +2014,7 @@
         <p class="review-text" data-lang="nl">"Het autovrije eiland geeft een gevoel van totale ontspanning. De houten loopbrug naar het strand is prachtig."</p>
         <p class="review-text" data-lang="en">"The car-free island gives a feeling of complete relaxation. The wooden boardwalk to the beach is beautiful."</p>
         <p class="review-text" data-lang="pt">"A ilha sem carros proporciona uma sensação de descanso total. A passadeira de madeira para a praia é linda."</p>
-        <span class="review-author">— Familie De Vries · Airbnb · 2025</span>
+        <span class="review-author">Familie De Vries · Airbnb · 2025</span>
       </div>
     </div>
     <div class="review-attribution reveal">
@@ -2055,7 +2060,7 @@
           <div class="action-card-arrow">→</div>
         </a>
         <div class="contact-map">
-          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-7.72,37.00,-7.67,37.04&amp;layer=mapnik&amp;marker=37.02,-7.695" title="Ilha Armona kaart" loading="lazy"></iframe>
+          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-7.715,37.015,-7.660,37.040&amp;layer=mapnik&amp;marker=37.027,-7.693" title="Ilha Armona kaart" loading="lazy"></iframe>
         </div>
       </div>
       <div class="contact-details">
