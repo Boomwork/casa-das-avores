@@ -2296,27 +2296,40 @@
   async function loadIcal() {
     const statusEl = document.getElementById('cal-status');
     const icalUrl = 'https://www.airbnb.nl/calendar/ical/27625624.ics?s=dd993d0d91cef80d93d7df40d2a00cfe';
+    // Proxies: raw endpoint first (direct text), then JSON-wrapped fallbacks
     const proxies = [
+      'https://api.allorigins.win/raw?url=' + encodeURIComponent(icalUrl),
       'https://api.allorigins.win/get?url=' + encodeURIComponent(icalUrl),
-      'https://corsproxy.io/?' + encodeURIComponent(icalUrl)
+      'https://corsproxy.io/?' + encodeURIComponent(icalUrl),
+      'https://proxy.cors.sh/' + icalUrl,
     ];
     let loaded = false;
-    for (const proxy of proxies) {
+    bookedDates = new Set(); // reset before load
+    for (const proxyUrl of proxies) {
       try {
-        const res = await fetch(proxy);
-        const data = await res.json();
-        const text = data.contents || data;
-        parseIcal(typeof text === 'string' ? text : JSON.stringify(text));
-        statusEl.textContent = '';
-        loaded = true;
-        break;
-      } catch(e) { /* try next */ }
+        const res = await fetch(proxyUrl, { cache: 'no-cache' });
+        if (!res.ok) continue;
+        const raw = await res.text();
+        // allorigins /get wraps content in JSON {contents: "..."}
+        let icalText = raw;
+        if (raw.trimStart().startsWith('{')) {
+          try { const j = JSON.parse(raw); if (j.contents) icalText = j.contents; } catch {}
+        }
+        if (icalText && icalText.includes('BEGIN:VCALENDAR')) {
+          parseIcal(icalText);
+          if (statusEl) statusEl.textContent = '';
+          loaded = true;
+          break;
+        }
+      } catch(e) { /* try next proxy */ }
     }
     if (!loaded) {
       const lang = currentLang();
-      statusEl.className = 'cal-error';
-      statusEl.innerHTML = (lang==='nl' ? '⚠ Agenda kon niet worden geladen. ' : lang==='en' ? '⚠ Calendar could not be loaded. ' : '⚠ Calendário não carregou. ')
-        + `<button class="cal-retry-btn" onclick="loadIcal()">${lang==='nl'?'Opnieuw proberen':lang==='en'?'Try again':'Tentar novamente'}</button>`;
+      if (statusEl) {
+        statusEl.className = 'cal-error';
+        statusEl.innerHTML = (lang==='nl' ? '⚠ Agenda kon niet worden geladen. ' : lang==='en' ? '⚠ Calendar could not be loaded. ' : '⚠ Calendário não carregou. ')
+          + `<button class="cal-retry-btn" onclick="loadIcal()">${lang==='nl'?'Opnieuw proberen':lang==='en'?'Try again':'Tentar novamente'}</button>`;
+      }
     }
     renderCalendar();
     if (loaded) computeNextAvailable();
@@ -2324,13 +2337,20 @@
 
   function parseIcal(text) {
     if (!text) return;
-    const lines = text.split(/\r?\n/);
+    // Unfold iCal lines (CRLF + whitespace = continuation)
+    const unfolded = text.replace(/\r?\n[ \t]/g, '');
+    const lines = unfolded.split(/\r?\n/);
     let inEvent = false, dtStart = null, dtEnd = null;
     for (const line of lines) {
       if (line.startsWith('BEGIN:VEVENT')) { inEvent = true; dtStart = null; dtEnd = null; }
       if (!inEvent) continue;
-      if (line.startsWith('DTSTART')) { const val = line.split(':')[1]?.trim(); if (val) dtStart = parseIcalDate(val); }
-      if (line.startsWith('DTEND'))   { const val = line.split(':')[1]?.trim(); if (val) dtEnd   = parseIcalDate(val); }
+      // Value is everything after the last colon (handles DTSTART;VALUE=DATE:20260614)
+      const colonIdx = line.indexOf(':');
+      if (colonIdx < 0) continue;
+      const key = line.slice(0, colonIdx).split(';')[0]; // strip params like ;VALUE=DATE
+      const val = line.slice(colonIdx + 1).trim();
+      if (key === 'DTSTART' && val) dtStart = parseIcalDate(val);
+      if (key === 'DTEND'   && val) dtEnd   = parseIcalDate(val);
       if (line.startsWith('END:VEVENT') && dtStart && dtEnd) {
         let cur = new Date(dtStart);
         while (cur < dtEnd) { bookedDates.add(cur.toISOString().slice(0,10)); cur.setDate(cur.getDate()+1); }
