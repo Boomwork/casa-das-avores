@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/5d45b621-4b53-493c-9032-d01d76e19a66.jpeg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b2d4f'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' fill='%23d4b07a' text-anchor='middle'%3ECA%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b2d4f'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' fill='%23d4b07a' text-anchor='middle'%3ECA%3C/text%3E%3C/svg%3E" />
   <meta property="og:title" content="Casa das Árvores | Ilha Armona, Algarve" />
   <meta property="og:description" content="Unieke vakantiewoning op het autovrije eiland Armona. 3 slaapkamers, 100m van het strand, Ria Formosa." />
   <meta property="og:image" content="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/5d45b621-4b53-493c-9032-d01d76e19a66.jpeg" />
@@ -43,6 +45,54 @@
       color: var(--text);
       font-weight: 300;
     }
+
+    ::selection { background: var(--gold); color: white; }
+    ::-moz-selection { background: var(--gold); color: white; }
+
+    /* custom scrollbar (WebKit) */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 5px; border: 2px solid var(--cream); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
+
+    /* scroll progress bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(to right, var(--gold), var(--gold-light));
+      z-index: 250;
+      transition: width 0.1s ease-out;
+    }
+
+    /* section ornament */
+    .section-ornament {
+      width: 60px; height: 14px;
+      margin: 1rem 0 1.5rem;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    .amenities-inner .section-ornament,
+    .calendar-inner .section-ornament { color: var(--gold-light); }
+
+    /* giant decorative section number */
+    .section-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(6rem, 14vw, 13rem);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--navy);
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 0;
+      top: -2.5rem;
+      left: -1rem;
+    }
+    .amenities-inner .section-num,
+    .calendar-inner .section-num { color: #ffffff; opacity: 0.06; }
+    .section-num-wrap { position: relative; }
 
     /* ── NAVIGATION ── */
     nav {
@@ -86,7 +136,20 @@
       text-transform: uppercase;
       transition: color 0.2s;
       cursor: pointer;
+      position: relative;
     }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 100%; height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { transform: scaleX(1); }
 
     .nav-links a:hover,
     .nav-links a.active { color: var(--gold); }
@@ -209,6 +272,25 @@
         linear-gradient(to top, rgba(17,30,53,0.88) 0%, rgba(17,30,53,0.4) 40%, transparent 70%);
     }
 
+    /* cinematic grain */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* elegant gold frame */
+    .hero-frame {
+      position: absolute;
+      inset: 24px;
+      z-index: 2;
+      border: 1px solid rgba(212,176,122,0.35);
+      pointer-events: none;
+    }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -230,6 +312,12 @@
       color: var(--gold-light);
       margin-bottom: 1.2rem;
     }
+    .hero-tag .char {
+      display: inline-block;
+      opacity: 0;
+      animation: charIn 0.5s ease forwards;
+    }
+    @keyframes charIn { to { opacity: 1; } }
 
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
@@ -244,6 +332,19 @@
       font-style: italic;
       color: var(--gold-light);
     }
+
+    /* word-by-word reveal */
+    .hero-title .word-mask {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+    }
+    .hero-title .word-mask > span {
+      display: inline-block;
+      transform: translateY(110%);
+      animation: wordRise 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes wordRise { to { transform: translateY(0); } }
 
     .hero-subtitle {
       font-size: 0.9rem;
@@ -263,16 +364,29 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       text-decoration: none;
-      transition: all 0.3s;
+      transition: transform 0.25s ease, background 0.3s, border-color 0.3s, color 0.3s;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
+    /* shine sweep */
+    .hero-cta.primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -120%;
+      width: 60%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.6s ease;
+    }
+    .hero-cta.primary:hover::after { left: 130%; }
 
     .hero-cta.primary {
       background: var(--gold);
       border: 1px solid var(--gold);
       color: white;
     }
-    .hero-cta.primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+    .hero-cta.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
 
     .hero-cta.secondary {
       background: transparent;
@@ -387,6 +501,17 @@
       font-size: 0.92rem;
     }
 
+    /* drop cap on intro */
+    .has-dropcap p:first-of-type::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.6rem;
+      font-weight: 400;
+      color: var(--gold);
+      float: left;
+      line-height: 0.8;
+      margin: 0.15rem 0.6rem 0 0;
+    }
+
     /* ── INTRO ── */
     .intro-grid {
       display: grid;
@@ -459,6 +584,11 @@
       background: linear-gradient(to right, transparent, var(--border-gold), transparent);
       margin: 0;
     }
+
+    /* wave dividers */
+    .wave-divider { display: block; width: 100%; height: 60px; line-height: 0; }
+    .wave-divider svg { width: 100%; height: 100%; display: block; }
+    @media (max-width: 768px) { .wave-divider { height: 36px; } }
 
     /* ── AMENITIES ── */
     .amenities-section {
@@ -835,6 +965,23 @@
       font-style: italic;
       margin-bottom: 1.4rem;
     }
+    .review-text::first-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+    }
+
+    /* parallax helper */
+    .parallax-img { will-change: transform; }
+
+    /* amenity icon draw on reveal */
+    .amenity-card.visible .amenity-icon svg {
+      animation: iconDraw 0.7s ease forwards;
+    }
+    @keyframes iconDraw {
+      from { opacity: 0; transform: translateY(6px) scale(0.9); }
+      to   { opacity: 1; transform: none; }
+    }
 
     .review-author {
       font-size: 0.68rem;
@@ -1003,6 +1150,8 @@
     /* ── FOOTER ── */
     footer {
       background: var(--navy-deep);
+      background-image:
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.015) 0 2px, transparent 2px 22px);
       color: rgba(255,255,255,0.35);
       padding: 3rem 5rem;
       display: flex;
@@ -1010,6 +1159,13 @@
       align-items: center;
       font-size: 0.75rem;
       letter-spacing: 0.06em;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-gold), transparent);
     }
 
     .footer-logo {
@@ -1131,11 +1287,35 @@
     /* ── LIGHTBOX ── */
     .lightbox {
       display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0,0,0,0.94);
       align-items: center; justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
     .lightbox.open { display: flex; }
-    .lightbox-img { max-width: 90vw; max-height: 80vh; object-fit: contain; display: block; }
+    .lightbox.shown { opacity: 1; }
+    .lightbox-img {
+      max-width: 88vw; max-height: 74vh; object-fit: contain; display: block;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .lightbox-img.swapping { opacity: 0; transform: scale(0.97); }
+
+    /* thumbnails strip */
+    .lightbox-thumbs {
+      display: flex; gap: 8px; margin-top: 1.2rem;
+      max-width: 90vw; overflow-x: auto; padding: 4px;
+    }
+    .lightbox-thumbs img {
+      width: 64px; height: 44px; object-fit: cover; cursor: pointer;
+      opacity: 0.45; border: 2px solid transparent; transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .lightbox-thumbs img.active { opacity: 1; border-color: var(--gold); }
+    .lightbox-thumbs img:hover { opacity: 0.85; }
+    .lightbox-counter {
+      color: rgba(255,255,255,0.6); font-size: 0.75rem; letter-spacing: 0.15em;
+    }
     .lightbox-close {
       position: absolute; top: 1.5rem; right: 1.5rem;
       background: none; border: none; color: white; cursor: pointer;
@@ -1153,9 +1333,10 @@
     .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.2); }
     .lightbox-prev svg, .lightbox-next svg { width: 28px; height: 28px; }
     .lightbox-caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: rgba(0,0,0,0.65); color: white;
-      padding: 1rem 2rem; font-size: 0.82rem; letter-spacing: 0.1em;
+      display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+      margin-top: 1rem;
+      color: white;
+      font-size: 0.82rem; letter-spacing: 0.1em;
       text-transform: uppercase; text-align: center;
     }
 
@@ -1174,7 +1355,16 @@
     .cal-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .cal-day.past { opacity: 0.3; pointer-events: none; }
     .cal-day.booked { background: rgba(180,40,40,0.25); color: rgba(255,255,255,0.3); text-decoration: line-through; }
-    .cal-day.available:hover { background: rgba(40,140,80,0.15); cursor: default; }
+    .cal-day.available:hover { background: rgba(40,140,80,0.15); cursor: default; box-shadow: 0 0 12px rgba(184,150,90,0.4); }
+    .cal-grid.swap-in { animation: calSlide 0.4s ease; }
+    @keyframes calSlide { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+    .cal-day.dayfade { opacity: 0; animation: dayFade 0.3s ease forwards; }
+    @keyframes dayFade { to { opacity: 1; } }
+    .cal-next-avail {
+      color: var(--gold-light); font-size: 0.82rem; letter-spacing: 0.04em;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .cal-next-avail svg { width: 15px; height: 15px; stroke: var(--gold-light); }
     /* skeleton */
     .cal-skeleton { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; }
     .cal-skel-day {
@@ -1291,6 +1481,8 @@
 </head>
 <body class="lang-nl">
 
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="closeMobileMenu()">&#x2715;</button>
@@ -1340,9 +1532,11 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-frame"></div>
   <div class="hero-content">
-    <span class="hero-tag">Ilha Armona · Algarve · Portugal</span>
-    <h1 class="hero-title">Casa das<br><em>Árvores</em></h1>
+    <span class="hero-tag" id="heroTag">Ilha Armona · Algarve · Portugal</span>
+    <h1 class="hero-title"><span class="word-mask"><span>Casa</span></span> <span class="word-mask"><span style="animation-delay:0.12s">das</span></span><br><span class="word-mask"><em><span style="animation-delay:0.24s">Árvores</span></em></span></h1>
     <p class="hero-subtitle" data-lang="nl">Een unieke vakantiewoning op het autovrije eiland Armona, midden in het Ria Formosa natuurgebied. Rust, zee en ruimte voor het hele gezin.</p>
     <p class="hero-subtitle" data-lang="en">A unique holiday home on the car-free island of Armona, nestled within the Ria Formosa nature reserve. Tranquillity, sea and space for the whole family.</p>
     <p class="hero-subtitle" data-lang="pt">Uma casa de férias única na ilha sem automóveis de Armona, no coração da Reserva Natural da Ria Formosa. Paz, mar e espaço para toda a família.</p>
@@ -1405,7 +1599,7 @@
   <div class="section">
     <div class="intro-grid">
       <div class="intro-image-stack">
-        <img class="img-main" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/cf1a2966-85a7-4b53-8f0d-2b8e6bc12037.jpeg" alt="Casa das Árvores" />
+        <img class="img-main parallax-img" data-speed="0.04" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/cf1a2966-85a7-4b53-8f0d-2b8e6bc12037.jpeg" alt="Casa das Árvores" />
         <img class="img-accent" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/25538ba9-5912-4a55-b9d4-9b39a1eb5acd.jpeg" alt="Terras" />
         <div class="intro-badge">
           <span class="badge-num">9</span>
@@ -1414,14 +1608,16 @@
           <span class="badge-txt" data-lang="pt">avaliações</span>
         </div>
       </div>
-      <div>
-        <p class="section-tag" data-lang="nl">Over de woning</p>
-        <p class="section-tag" data-lang="en">About the home</p>
-        <p class="section-tag" data-lang="pt">Sobre a casa</p>
-        <h2 class="section-title" data-lang="nl">Een oase van rust in de Algarve</h2>
-        <h2 class="section-title" data-lang="en">A tranquil retreat in the Algarve</h2>
-        <h2 class="section-title" data-lang="pt">Um refúgio de paz no Algarve</h2>
-        <div class="section-body">
+      <div class="section-num-wrap">
+        <span class="section-num">01</span>
+        <p class="section-tag reveal" data-lang="nl">Over de woning</p>
+        <p class="section-tag reveal" data-lang="en">About the home</p>
+        <p class="section-tag reveal" data-lang="pt">Sobre a casa</p>
+        <h2 class="section-title reveal" data-lang="nl">Een oase van rust in de Algarve</h2>
+        <h2 class="section-title reveal" data-lang="en">A tranquil retreat in the Algarve</h2>
+        <h2 class="section-title reveal" data-lang="pt">Um refúgio de paz no Algarve</h2>
+        <svg class="section-ornament" viewBox="0 0 60 14"><path d="M0 7 H22 M38 7 H60 M30 2 L34 7 L30 12 L26 7 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+        <div class="section-body has-dropcap">
           <p data-lang="nl">Casa das Árvores ligt op het autovrije eiland Armona, dat deel uitmaakt van het Ria Formosa natuurgebied aan de oostkust van de Algarve. Het eiland is alleen bereikbaar per veerboot vanuit Olhão (±20 minuten) of met een watertaxi. Olhão zelf ligt op slechts 20 minuten rijden van vliegveld Faro.<br><br>Vanuit de aanlegsteiger is het een aangenaam wandeling van 15 minuten over het hoofdpad naar de woning. Op nog geen 100 meter van het huis begint een houten loopbrug door de duinen, die rechtstreeks naar het strand leidt.</p>
           <p data-lang="en">Casa das Árvores is located on the car-free island of Armona, part of the Ria Formosa nature reserve on the eastern coast of the Algarve. The island is only accessible by ferry from Olhão (approx. 20 minutes) or by water taxi. Olhão itself is just 20 minutes from Faro Airport.<br><br>From the ferry pier it is a pleasant 15-minute walk along the main path to the house. Less than 100 metres away, a wooden boardwalk winds through the dunes directly to the beach.</p>
           <p data-lang="pt">A Casa das Árvores situa-se na ilha sem automóveis de Armona, parte da Reserva Natural da Ria Formosa na costa oriental do Algarve. A ilha só é acessível de barco a partir de Olhão (aprox. 20 minutos) ou de táxi aquático. Olhão fica a apenas 20 minutos do Aeroporto de Faro.<br><br>Do cais da balsa são 15 minutos de caminhada pelo caminho principal até à casa. A menos de 100 metros, uma passadeira de madeira atravessa as dunas diretamente até à praia.</p>
@@ -1463,17 +1659,20 @@
         </div>
       </div>
       <div class="island-photo reveal">
-        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/7142ca27-9389-4ee4-8870-e3baa5dedba2.jpeg" alt="Ilha Armona" loading="lazy" />
+        <img class="parallax-img" data-speed="0.05" src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/7142ca27-9389-4ee4-8870-e3baa5dedba2.jpeg" alt="Ilha Armona" loading="lazy" />
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="wave-divider" style="background:var(--navy);" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="var(--cream)" d="M0,0 L1440,0 L1440,30 C1080,60 720,5 360,35 C240,45 120,30 0,40 Z"/></svg>
+</div>
 
 <!-- AMENITIES -->
 <section id="voorzieningen" class="amenities-section">
-  <div class="amenities-inner">
+  <div class="amenities-inner section-num-wrap">
+    <span class="section-num">02</span>
     <p class="section-tag" data-lang="nl">Wat wij bieden</p>
     <p class="section-tag" data-lang="en">What we offer</p>
     <p class="section-tag" data-lang="pt">O que oferecemos</p>
@@ -1562,15 +1761,20 @@
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--navy);" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="var(--warm-white)" d="M0,60 L1440,60 L1440,25 C1080,55 720,10 360,30 C240,38 120,25 0,32 Z"/></svg>
+</div>
+
 <!-- GALLERY -->
 <section id="galerij">
-  <div class="section">
-    <p class="section-tag" data-lang="nl">De woning in beeld</p>
-    <p class="section-tag" data-lang="en">In pictures</p>
-    <p class="section-tag" data-lang="pt">Em imagens</p>
-    <h2 class="section-title" data-lang="nl">Sfeer en ruimte</h2>
-    <h2 class="section-title" data-lang="en">Atmosphere &amp; space</h2>
-    <h2 class="section-title" data-lang="pt">Ambiente e espaço</h2>
+  <div class="section section-num-wrap">
+    <span class="section-num">03</span>
+    <p class="section-tag reveal" data-lang="nl">De woning in beeld</p>
+    <p class="section-tag reveal" data-lang="en">In pictures</p>
+    <p class="section-tag reveal" data-lang="pt">Em imagens</p>
+    <h2 class="section-title reveal" data-lang="nl">Sfeer en ruimte</h2>
+    <h2 class="section-title reveal" data-lang="en">Atmosphere &amp; space</h2>
+    <h2 class="section-title reveal" data-lang="pt">Ambiente e espaço</h2>
     <div class="gallery-editorial">
       <div class="gallery-item" onclick="openLightbox(0)" style="cursor:pointer;position:relative;">
         <img src="https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/5d45b621-4b53-493c-9032-d01d76e19a66.jpeg" alt="Buitenkant" loading="lazy" />
@@ -1611,7 +1815,8 @@
   <button class="lightbox-prev" onclick="lightboxNav(-1)" aria-label="Vorige"><i data-lucide="chevron-left"></i></button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="" />
   <button class="lightbox-next" onclick="lightboxNav(1)" aria-label="Volgende"><i data-lucide="chevron-right"></i></button>
-  <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div class="lightbox-caption"><span id="lightboxCounter" class="lightbox-counter"></span><span id="lightboxCaption"></span></div>
+  <div class="lightbox-thumbs" id="lightboxThumbs"></div>
 </div>
 
 <!-- BEDROOMS -->
@@ -1676,13 +1881,14 @@
 
 <!-- CALENDAR -->
 <section id="beschikbaarheid" class="calendar-section">
-  <div class="calendar-inner">
-    <p class="section-tag" data-lang="nl">Planning</p>
-    <p class="section-tag" data-lang="en">Planning</p>
-    <p class="section-tag" data-lang="pt">Planeamento</p>
-    <h2 class="section-title" data-lang="nl">Beschikbaarheid</h2>
-    <h2 class="section-title" data-lang="en">Availability</h2>
-    <h2 class="section-title" data-lang="pt">Disponibilidade</h2>
+  <div class="calendar-inner section-num-wrap">
+    <span class="section-num">04</span>
+    <p class="section-tag reveal" data-lang="nl">Planning</p>
+    <p class="section-tag reveal" data-lang="en">Planning</p>
+    <p class="section-tag reveal" data-lang="pt">Planeamento</p>
+    <h2 class="section-title reveal" data-lang="nl">Beschikbaarheid</h2>
+    <h2 class="section-title reveal" data-lang="en">Availability</h2>
+    <h2 class="section-title reveal" data-lang="pt">Disponibilidade</h2>
     <div class="calendar-layout">
       <div>
         <div class="cal-dual" id="calDual">
@@ -1727,6 +1933,7 @@
         <p data-lang="nl"><i data-lucide="clock" style="width:14px;height:14px;stroke:var(--gold-light);vertical-align:middle;margin-right:4px;"></i><strong>Aankomst:</strong> vanaf 15:00 &nbsp;·&nbsp; <strong>Vertrek:</strong> voor 10:00 &nbsp;·&nbsp; <strong>Max.:</strong> 6 personen</p>
         <p data-lang="en"><i data-lucide="clock" style="width:14px;height:14px;stroke:var(--gold-light);vertical-align:middle;margin-right:4px;"></i><strong>Check-in:</strong> from 15:00 &nbsp;·&nbsp; <strong>Check-out:</strong> before 10:00 &nbsp;·&nbsp; <strong>Max.:</strong> 6 persons</p>
         <p data-lang="pt"><i data-lucide="clock" style="width:14px;height:14px;stroke:var(--gold-light);vertical-align:middle;margin-right:4px;"></i><strong>Check-in:</strong> 15:00 &nbsp;·&nbsp; <strong>Check-out:</strong> 10:00 &nbsp;·&nbsp; <strong>Máx.:</strong> 6 pessoas</p>
+        <div class="cal-next-avail" id="calNextAvail" style="display:none;"><i data-lucide="calendar-check"></i><span id="calNextAvailText"></span></div>
         <a href="https://www.airbnb.nl/rooms/27625624" target="_blank" class="book-btn" style="display:inline-flex;align-items:center;gap:0.6rem;margin-top:1.5rem;" data-lang="nl">
           <svg class="airbnb-logo" viewBox="0 0 24 24" fill="#FF5A5F"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4.5 11.5c-.23 1.03-2.1 2-4.5 2s-4.27-.97-4.5-2c-.14-.61.07-1.22.5-1.72l2-2.34c.23-.27.35-.59.31-.91l-.2-1.97c-.07-.62.38-1.06.89-1.06s.96.44.89 1.06l-.2 1.97c-.04.32.08.64.31.91l2 2.34c.43.5.64 1.11.5 1.72z"/></svg>
           Boek via Airbnb
@@ -1749,15 +1956,20 @@
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--navy-deep);" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="var(--cream)" d="M0,60 L1440,60 L1440,28 C1080,58 720,12 360,32 C240,40 120,28 0,35 Z"/></svg>
+</div>
+
 <!-- REVIEWS -->
 <section class="reviews-section">
-  <div class="reviews-inner">
-    <p class="section-tag" data-lang="nl">Wat gasten zeggen</p>
-    <p class="section-tag" data-lang="en">What guests say</p>
-    <p class="section-tag" data-lang="pt">O que os hóspedes dizem</p>
-    <h2 class="section-title" data-lang="nl">Recensies</h2>
-    <h2 class="section-title" data-lang="en">Reviews</h2>
-    <h2 class="section-title" data-lang="pt">Avaliações</h2>
+  <div class="reviews-inner section-num-wrap">
+    <span class="section-num">05</span>
+    <p class="section-tag reveal" data-lang="nl">Wat gasten zeggen</p>
+    <p class="section-tag reveal" data-lang="en">What guests say</p>
+    <p class="section-tag reveal" data-lang="pt">O que os hóspedes dizem</p>
+    <h2 class="section-title reveal" data-lang="nl">Recensies</h2>
+    <h2 class="section-title reveal" data-lang="en">Reviews</h2>
+    <h2 class="section-title reveal" data-lang="pt">Avaliações</h2>
     <div class="reviews-score">
       <span class="score-big">5,0</span>
       <div>
@@ -1926,6 +2138,7 @@
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll(`.lang-btn[onclick="setLang('${lang}')"]`).forEach(b => b.classList.add('active'));
     renderCalendar();
+    if (typeof computeNextAvailable === 'function') computeNextAvailable();
   }
   function currentLang() { return document.body.className.replace('lang-',''); }
 
@@ -1946,26 +2159,71 @@
     document.body.style.overflow = '';
   }
 
-  // ── PARALLAX ──
+  // ── UNIFIED SCROLL HANDLER ──
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReducedMotion) {
-    const heroBg = document.querySelector('.hero-bg');
-    window.addEventListener('scroll', () => {
-      if (heroBg) heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.15}px)`;
-    }, {passive: true});
-  }
-
-  // ── SCROLL INDICATOR ──
+  const heroBg = document.querySelector('.hero-bg');
   const scrollInd = document.getElementById('scrollIndicator');
-  window.addEventListener('scroll', () => {
-    if (scrollInd) scrollInd.classList.toggle('hidden', window.scrollY > 10);
-  }, {passive: true});
-
-  // ── BACK TO TOP ──
   const btt = document.getElementById('backToTop');
+  const progressBar = document.getElementById('scrollProgress');
+  const parallaxImgs = document.querySelectorAll('.parallax-img');
+  let ticking = false;
+
+  function onScroll() {
+    const y = window.scrollY;
+    // scroll progress
+    if (progressBar) {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+    }
+    // scroll indicator + back to top
+    if (scrollInd) scrollInd.classList.toggle('hidden', y > 10);
+    if (btt) btt.classList.toggle('visible', y > 400);
+    if (!prefersReducedMotion) {
+      if (heroBg) heroBg.style.transform = `scale(1.05) translateY(${y * 0.15}px)`;
+      // image parallax (only when near viewport)
+      parallaxImgs.forEach(img => {
+        const r = img.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) {
+          const speed = parseFloat(img.dataset.speed || '0.05');
+          const offset = (r.top - window.innerHeight / 2) * -speed;
+          img.style.transform = `translateY(${offset}px) scale(1.06)`;
+        }
+      });
+    }
+    ticking = false;
+  }
   window.addEventListener('scroll', () => {
-    if (btt) btt.classList.toggle('visible', window.scrollY > 400);
+    if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
   }, {passive: true});
+  onScroll();
+
+  // ── HERO TAG CHAR SPLIT ──
+  (function splitHeroTag(){
+    const tag = document.getElementById('heroTag');
+    if (!tag || prefersReducedMotion) return;
+    const text = tag.textContent;
+    tag.innerHTML = '';
+    [...text].forEach((ch, i) => {
+      const s = document.createElement('span');
+      s.className = 'char';
+      s.textContent = ch === ' ' ? ' ' : ch;
+      s.style.animationDelay = (0.5 + i * 0.03) + 's';
+      tag.appendChild(s);
+    });
+  })();
+
+  // ── MAGNETIC BUTTONS ──
+  if (!prefersReducedMotion && window.matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.hero-cta').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const mx = e.clientX - r.left - r.width / 2;
+        const my = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${mx * 0.15}px, ${my * 0.25}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  }
 
   // ── SCROLL REVEAL ──
   if (!prefersReducedMotion) {
@@ -1974,6 +2232,24 @@
     }, {threshold: 0.12});
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   }
+
+  // ── COUNT-UP STATS ──
+  function countUp(el) {
+    const target = parseInt(el.dataset.count, 10);
+    if (prefersReducedMotion || isNaN(target)) { el.textContent = target; return; }
+    const dur = 1200, start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); countObs.unobserve(e.target); } });
+  }, {threshold: 0.5});
+  document.querySelectorAll('.stat-number[data-count]').forEach(el => countObs.observe(el));
 
   // ── ACTIVE NAV ──
   const sections = document.querySelectorAll('section[id]');
@@ -2038,6 +2314,7 @@
         + `<button class="cal-retry-btn" onclick="loadIcal()">${lang==='nl'?'Opnieuw proberen':lang==='en'?'Try again':'Tentar novamente'}</button>`;
     }
     renderCalendar();
+    if (loaded) computeNextAvailable();
   }
 
   function parseIcal(text) {
@@ -2087,15 +2364,44 @@
     grid.innerHTML = html;
   }
 
-  function renderCalendar() {
+  function renderCalendar(animate) {
     renderOneMonth('cal-grid', 'cal-month-label', calYear, calMonth);
     const nextM = calMonth === 11 ? 0 : calMonth + 1;
     const nextY = calMonth === 11 ? calYear + 1 : calYear;
     renderOneMonth('cal-grid-2', 'cal-month-label-2', nextY, nextM);
+    if (animate && !prefersReducedMotion) {
+      ['cal-grid','cal-grid-2'].forEach(id => {
+        const g = document.getElementById(id);
+        if (g) { g.classList.remove('swap-in'); void g.offsetWidth; g.classList.add('swap-in'); }
+      });
+    }
   }
 
-  function prevMonth() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); }
-  function nextMonth() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); }
+  function computeNextAvailable() {
+    const el = document.getElementById('calNextAvail');
+    const txt = document.getElementById('calNextAvailText');
+    if (!el || !txt) return;
+    const lang = currentLang();
+    const today = new Date(); today.setHours(0,0,0,0);
+    for (let i = 0; i < 365; i++) {
+      const d = new Date(today); d.setDate(today.getDate() + i);
+      const ds = d.toISOString().slice(0,10);
+      if (!bookedDates.has(ds)) {
+        const dn = d.getDate();
+        const mn = (MONTH_NAMES[lang]||MONTH_NAMES.nl)[d.getMonth()];
+        const label = lang==='nl' ? `Eerstvolgende vrije dag: ${dn} ${mn}`
+                    : lang==='en' ? `Next available day: ${dn} ${mn}`
+                    : `Próximo dia livre: ${dn} ${mn}`;
+        txt.textContent = label;
+        el.style.display = 'flex';
+        return;
+      }
+    }
+    el.style.display = 'none';
+  }
+
+  function prevMonth() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(true); }
+  function nextMonth() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(true); }
 
   // ── LIGHTBOX ──
   const galleryPhotos = [
@@ -2107,24 +2413,52 @@
     {src:'https://a0.muscache.com/im/pictures/miso/Hosting-27625624/original/1d1818e7-3a73-4757-be97-e8a140045fe1.jpeg', cap:'Slaapkamer 2'}
   ];
   let currentPhoto = 0;
+  // build thumbnails once
+  (function buildThumbs(){
+    const wrap = document.getElementById('lightboxThumbs');
+    if (!wrap) return;
+    galleryPhotos.forEach((p, i) => {
+      const t = document.createElement('img');
+      t.src = p.src; t.alt = p.cap; t.loading = 'lazy';
+      t.onclick = () => showPhoto(i);
+      wrap.appendChild(t);
+    });
+  })();
+
+  function updateLightboxUI() {
+    const img = document.getElementById('lightboxImg');
+    img.classList.add('swapping');
+    setTimeout(() => {
+      img.src = galleryPhotos[currentPhoto].src;
+      img.alt = galleryPhotos[currentPhoto].cap;
+      img.classList.remove('swapping');
+    }, 180);
+    document.getElementById('lightboxCaption').textContent = galleryPhotos[currentPhoto].cap;
+    document.getElementById('lightboxCounter').textContent = (currentPhoto+1) + ' / ' + galleryPhotos.length;
+    document.querySelectorAll('#lightboxThumbs img').forEach((t,i) => t.classList.toggle('active', i === currentPhoto));
+  }
+  function showPhoto(i) { currentPhoto = i; updateLightboxUI(); }
   function openLightbox(i) {
     currentPhoto = i;
     const lb = document.getElementById('lightbox');
-    document.getElementById('lightboxImg').src = galleryPhotos[i].src;
-    document.getElementById('lightboxImg').alt = galleryPhotos[i].cap;
+    const img = document.getElementById('lightboxImg');
+    img.src = galleryPhotos[i].src; img.alt = galleryPhotos[i].cap;
     document.getElementById('lightboxCaption').textContent = galleryPhotos[i].cap;
+    document.getElementById('lightboxCounter').textContent = (i+1) + ' / ' + galleryPhotos.length;
+    document.querySelectorAll('#lightboxThumbs img').forEach((t,j) => t.classList.toggle('active', j === i));
     lb.classList.add('open');
+    requestAnimationFrame(() => lb.classList.add('shown'));
     document.body.style.overflow = 'hidden';
   }
   function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('shown');
+    setTimeout(() => lb.classList.remove('open'), 350);
     document.body.style.overflow = '';
   }
   function lightboxNav(dir) {
     currentPhoto = (currentPhoto + dir + galleryPhotos.length) % galleryPhotos.length;
-    document.getElementById('lightboxImg').src = galleryPhotos[currentPhoto].src;
-    document.getElementById('lightboxImg').alt = galleryPhotos[currentPhoto].cap;
-    document.getElementById('lightboxCaption').textContent = galleryPhotos[currentPhoto].cap;
+    updateLightboxUI();
   }
   document.addEventListener('keydown', e => {
     if (!document.getElementById('lightbox').classList.contains('open')) return;
@@ -2132,9 +2466,19 @@
     if (e.key === 'ArrowLeft') lightboxNav(-1);
     if (e.key === 'ArrowRight') lightboxNav(1);
   });
-  document.getElementById('lightbox').addEventListener('click', function(e) {
+  const lbEl = document.getElementById('lightbox');
+  lbEl.addEventListener('click', function(e) {
     if (e.target === this) closeLightbox();
   });
+  // swipe support
+  let touchX = null;
+  lbEl.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, {passive:true});
+  lbEl.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) lightboxNav(dx < 0 ? 1 : -1);
+    touchX = null;
+  }, {passive:true});
 
   // ── INIT ──
   document.getElementById('footer-year').textContent = new Date().getFullYear();
